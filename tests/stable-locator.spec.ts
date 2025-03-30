@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { extendPlaywright, enhanceLocator } from '../index';
+import { setupStableLocatorSupport, enhanceLocator } from '../index';
 
 // Extend the Playwright Page interface for TypeScript
 declare module '@playwright/test' {
@@ -9,7 +9,7 @@ declare module '@playwright/test' {
 }
 
 // This is for notification only, the real enhancement happens on each locator
-extendPlaywright();
+setupStableLocatorSupport();
 
 test.describe('Stable Locator Tests', () => {
   test.beforeEach(async ({ page }) => {

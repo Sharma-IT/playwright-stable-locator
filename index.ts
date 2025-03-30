@@ -29,22 +29,22 @@ export const config = {
 import { setDefaultDebugMode, getDefaultDebugMode } from './stableLocator';
 
 /**
- * Extends Playwright with the ability to wait for elements to be stable (not animating)
+ * Sets up Playwright with the ability to wait for elements to be stable (not animating)
  * 
  * @param options Configuration options
  * @param options.debug Whether to enable debug mode for detailed logging (default: false)
  */
-export function extendPlaywright(options: { debug?: boolean } = {}): void {
+export function setupStableLocatorSupport(options: { debug?: boolean } = {}): void {
   // Set debug mode if specified
   if (options.debug !== undefined) {
     setDefaultDebugMode(options.debug);
   }
   
-  // Output a message indicating extension was applied
+  // Output a message indicating setup was applied
   if (getDefaultDebugMode()) {
-    console.log('Playwright extended with stable locator functionality (debug mode: ON)');
+    console.log('Playwright stable locator support initialized (debug mode: ON)');
   } else {
-    console.log('Playwright extended with stable locator functionality');
+    console.log('Playwright stable locator support initialized');
   }
   
   // The actual implementation happens in enhancedLocator.ts.

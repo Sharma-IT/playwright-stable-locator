@@ -19,10 +19,10 @@ npm install playwright-stable-locator --save-dev
 
 ```typescript
 import { test, expect } from '@playwright/test';
-import { extendPlaywright } from 'playwright-stable-locator';
+import { setupStableLocatorSupport } from 'playwright-stable-locator';
 
-// Extend Playwright with stable locator functionality
-extendPlaywright();
+// Set up Playwright with stable locator functionality
+setupStableLocatorSupport();
 
 test('waits for button to be stable before clicking', async ({ page }) => {
   await page.goto('https://example.com');
@@ -86,7 +86,7 @@ The key components of this library are:
 
 1. **StableLocator** - The core class that implements the stability detection logic
 2. **enhanceLocator** - A function that enhances Playwright's Locator with stability methods
-3. **extendPlaywright** - A helper function to apply the enhancement to all locators
+3. **setupStableLocatorSupport** - A helper function to initialize the stability detection functionality
 
 ### Understanding Animation Detection
 
@@ -145,10 +145,10 @@ The test suite provides comprehensive coverage of the Stable Locator functionali
 This library includes a debug mode feature that can help diagnose issues with animations and transitions:
 
 ```typescript
-import { extendPlaywright, setDefaultDebugMode } from 'playwright-stable-locator';
+import { setupStableLocatorSupport, setDefaultDebugMode } from 'playwright-stable-locator';
 
 // Option 1: Enable debug mode globally when extending Playwright
-extendPlaywright({ debug: true });
+setupStableLocatorSupport({ debug: true });
 
 // Option 2: Enable or disable debug mode globally at any time
 setDefaultDebugMode(true);
