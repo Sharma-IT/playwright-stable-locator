@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/playwright-stable-locator.svg)](https://www.npmjs.com/package/playwright-stable-locator)
 [![npm downloads](https://img.shields.io/npm/dm/playwright-stable-locator.svg)](https://www.npmjs.com/package/playwright-stable-locator)
-[![License](https://img.shields.io/npm/l/playwright-stable-locator.svg)](https://github.com/Sharma-IT/stable-locator-playwright/blob/master/LICENSE)
+[![License](https://img.shields.io/npm/l/playwright-stable-locator.svg)](https://github.com/Sharma-IT/playwright-stable-locator/blob/main/LICENSE)
 
 This library extends Playwright with the ability to wait for elements to be stable (not animating) before interacting with them.
 
@@ -205,7 +205,7 @@ npm run build:test -- tests/stable-locator.spec.ts
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request to the [GitHub repository](https://github.com/Sharma-IT/stable-locator-playwright).
+Contributions are welcome! Please feel free to submit a Pull Request to the [GitHub repository](https://github.com/Sharma-IT/playwright-stable-locator/blob/main/LICENSE).
 
 ## License
 
