@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stable Locator Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        button {
+            padding: 10px 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-primary {
+            background-color: #0056b3;
+            color: white;
+        }
+        
+        /* Animation styles */
+        .moving-button {
+            position: relative;
+            animation: moveButton 3s infinite alternate;
+        }
+        
+        .growing-button {
+            animation: growButton 2s infinite alternate;
+        }
+        
+        .shaking-button {
+            animation: shakeButton 0.5s infinite;
+        }
+        
+        .delayed-button {
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 2s;
+        }
+        
+        .color-transition-button {
+            background-color: #0056b3;
+            color: white;
+            transition: background-color 2s, color 2s;
+        }
+        
+        .color-transition-button:hover {
+            background-color: #28a745;
+            color: black;
+        }
+        
+        .moving-transition-button {
+            position: relative;
+            left: 0;
+            transition: left 1.5s ease-in-out;
+        }
+        
+        .moving-transition-button.moved {
+            left: 100px;
+        }
+        
+        .multi-animation-button {
+            animation: 
+                moveButton 3s infinite alternate,
+                shakeButton 0.5s infinite,
+                growButton 2s infinite alternate;
+        }
+        
+        .stop-animations {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        /* Animation keyframes */
+        @keyframes moveButton {
+            0% { left: 0; }
+            100% { left: 100px; }
+        }
+        
+        @keyframes growButton {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.5); }
+        }
+        
+        @keyframes shakeButton {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(0); }
+            75% { transform: translateX(5px); }
+            100% { transform: translateX(0); }
+        }
+        
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Stable Locator Test Page</h1>
+    
+    <div class="container">
+        <h2>Animated Buttons</h2>
+        
+        <div>
+            <button id="moving-btn" class="moving-button">Moving Button</button>
+            <p>This button moves horizontally</p>
+        </div>
+        
+        <div>
+            <button id="growing-btn" class="growing-button">Growing Button</button>
+            <p>This button changes size</p>
+        </div>
+        
+        <div>
+            <button id="shaking-btn" class="shaking-button">Shaking Button</button>
+            <p>This button shakes rapidly</p>
+        </div>
+        
+        <div>
+            <button id="delayed-btn" class="delayed-button">Delayed Button</button>
+            <p>This button appears after a delay</p>
+        </div>
+        
+        <div>
+            <button id="normal-btn">Static Button</button>
+            <p>This button doesn't animate</p>
+        </div>
+        
+        <div>
+            <button id="color-transition-btn" class="color-transition-button">Color Transition</button>
+            <p>This button changes color on hover (CSS transition)</p>
+        </div>
+        
+        <div>
+            <button id="moving-transition-btn" class="moving-transition-button">Moving Transition</button>
+            <button id="toggle-transition" class="btn-primary">Toggle Position</button>
+            <p>This button moves with CSS transitions</p>
+        </div>
+        
+        <div>
+            <button id="multi-animation-btn" class="multi-animation-button">Multiple Animations</button>
+            <p>This button has multiple animations at once</p>
+        </div>
+    </div>
+    
+    <button id="toggle-animations" class="stop-animations">Stop All Animations</button>
+    
+    <div id="click-log" class="container">
+        <h2>Click Log</h2>
+        <div id="log-entries"></div>
+    </div>
+    
+    <script>
+        // Log when buttons are clicked
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const logEntry = document.createElement('p');
+                logEntry.textContent = `Button "${this.textContent}" was clicked at ${new Date().toLocaleTimeString()}`;
+                document.getElementById('log-entries').prepend(logEntry);
+                
+                // If this is the toggle button, stop/start animations
+                if (this.id === 'toggle-animations') {
+                    const buttons = document.querySelectorAll('.moving-button, .growing-button, .shaking-button, .delayed-button, .multi-animation-button');
+                    buttons.forEach(button => {
+                        if (button.style.animationPlayState === 'paused') {
+                            button.style.animationPlayState = 'running';
+                            this.textContent = 'Stop All Animations';
+                        } else {
+                            button.style.animationPlayState = 'paused';
+                            this.textContent = 'Start All Animations';
+                        }
+                    });
+                }
+                
+                // Handle the transition toggle button
+                if (this.id === 'toggle-transition') {
+                    const transitionBtn = document.getElementById('moving-transition-btn');
+                    transitionBtn.classList.toggle('moved');
+                }
+            });
+        });
+        
+        // For the color transition button, simulate hover programmatically
+        const colorBtn = document.getElementById('color-transition-btn');
+        colorBtn.addEventListener('mouseenter', function() {
+            this.style.backgroundColor = '#28a745';
+            this.style.color = 'black';
+        });
+        
+        colorBtn.addEventListener('mouseleave', function() {
+            this.style.backgroundColor = '#0056b3';
+            this.style.color = 'white';
+        });
+    </script>
+</body>
+</html> 
