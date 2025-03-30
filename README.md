@@ -205,11 +205,11 @@ npm run build:test -- tests/stable-locator.spec.ts
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request to the [GitHub repository](https://github.com/Sharma-IT/playwright-stable-locator/blob/main/LICENSE).
+Contributions are welcome! Please feel free to submit a Pull Request to the [GitHub repository](https://github.com/Sharma-IT/playwright-stable-locator/pulls).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Sharma-IT/playwright-stable-locator/blob/main/LICENSE) file for details.
 
 ## Author
 
