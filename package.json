@@ -4,11 +4,16 @@
     "description": "Extends Playwright with the ability to wait for elements to be stable (not animating)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
     "scripts": {
         "build": "tsc",
         "test": "playwright test",
         "build:test": "npm run build && npm test",
-        "debug": "npm run build && npx playwright test tests/debug-locator.spec.ts"
+        "debug": "npm run build && npx playwright test tests/debug-locator.spec.ts --project=chromium"
     },
     "keywords": [
         "playwright",
@@ -18,11 +23,10 @@
     ],
     "author": "Shubham Sharma",
     "license": "MIT",
-    "peerDependencies": {
+    "dependencies": {
         "@playwright/test": "^1.30.0"
     },
     "devDependencies": {
-        "@playwright/test": "^1.30.0",
         "@types/node": "^22.13.14",
         "http-server": "^14.1.1",
         "typescript": "^4.9.5"
