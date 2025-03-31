@@ -1,5 +1,5 @@
 import { Locator } from '@playwright/test';
-import { StableLocator, WaitForStableOptions, StabilityCheckResult, getDefaultDebugMode } from './stableLocator';
+import { StableLocator, WaitForStableOptions, getDefaultDebugMode } from './stableLocator';
 
 // Extend Playwright's Locator interface
 declare module '@playwright/test' {
