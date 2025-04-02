@@ -32,28 +32,28 @@ Add to your Playwright project in just a few steps:
 
 ```typescript
 import { test, expect } from '@playwright/test';
-import { setupStableLocatorSupport, enhanceLocator } from 'playwright-stable-locator';
+import { setupStableLocatorSupport, createStableLocator, StableLocatorType } from 'playwright-stable-locator';
 
 // 1. Set up Playwright with stable locator functionality
 setupStableLocatorSupport();
 
 // 2. Optional: Add a helper method to Page for easier access
 test.beforeEach(async ({ page }) => {
-  page.stableLocator = (selector: string) => {
-    return enhanceLocator(page.locator(selector));
+  page.stableLocator = (selector: string, debug?: boolean) => {
+    return createStableLocator(page.locator(selector), debug);
   };
 });
 
 // 3. Use in your tests
 test('waits for button to be stable before clicking', async ({ page }) => {
   await page.goto('https://example.com');
-  
+
   // Use the helper method
   await page.stableLocator('button.animated').waitForStable();
   await page.stableLocator('button.animated').click();
-  
-  // Or enhance a locator directly
-  const button = enhanceLocator(page.locator('.moving-element'));
+
+  // Or create a stable locator directly
+  const button = createStableLocator(page.locator('.moving-element'));
   await button.waitForStable();
   await button.click();
 });
@@ -67,7 +67,7 @@ For TypeScript users, add type definitions for the `stableLocator` helper method
 // Add to your test files or in a global setup file
 declare module '@playwright/test' {
   interface Page {
-    stableLocator(selector: string): ReturnType<typeof enhanceLocator>;
+    stableLocator(selector: string, debug?: boolean): StableLocatorType;
   }
 }
 ```
@@ -90,8 +90,8 @@ await button.waitForStable();
 await button.click();
 
 // Direct usage without helper methods
-import { enhanceLocator } from 'playwright-stable-locator';
-const stableButton = enhanceLocator(page.locator('#animated-button'));
+import { createStableLocator } from 'playwright-stable-locator';
+const stableButton = createStableLocator(page.locator('#animated-button'));
 await stableButton.waitForStable();
 await stableButton.click();
 ```
@@ -113,7 +113,7 @@ setDefaultDebugMode(true);
 const locator = page.stableLocator('#animated-button', true);
 
 // Option 4: Enable debug mode for a specific waitForStable call
-await page.stableLocator('#animated-button').waitForStable({ 
+await page.stableLocator('#animated-button').waitForStable({
   timeout: 5000,
   debug: true
 });
@@ -142,7 +142,7 @@ The library enhances Playwright's Locator API by adding stability detection usin
 The key components of this library are:
 
 1. **StableLocator** - The core class that implements the stability detection logic
-2. **enhanceLocator** - A function that enhances Playwright's Locator with stability methods
+2. **createStableLocator** - A function that creates a Playwright Locator with stability methods
 3. **setupStableLocatorSupport** - A helper function to initialize the stability detection functionality
 
 ### Understanding Animation Detection

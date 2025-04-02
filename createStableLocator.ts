@@ -14,19 +14,19 @@ declare module '@playwright/test' {
   }
 }
 
-// Define a type that includes our enhanced methods
-export type EnhancedLocator = Locator & {
+// Define a type that includes our stability methods
+export type StableLocatorType = Locator & {
   waitForStable(options?: WaitForStableOptions): Promise<void>;
   waitFor(options?: { state?: 'attached' | 'detached' | 'visible' | 'hidden' | 'stable', timeout?: number, debug?: boolean }): Promise<void>;
 };
 
 /**
- * Enhances Playwright's Locator class with stable state functionality
+ * Creates a Playwright Locator with stable state functionality
  * @param locator The locator to enhance
  * @param debug Whether to enable debug mode (default: follows global setting)
  * @returns An enhanced locator with stable state functionality
  */
-export function enhanceLocator(locator: Locator, debug?: boolean): EnhancedLocator {
+export function createStableLocator(locator: Locator, debug?: boolean): StableLocatorType {
   // Determine debug mode (use parameter if specified, otherwise use global default)
   const debugMode = debug !== undefined ? debug : getDefaultDebugMode();
 
@@ -54,5 +54,5 @@ export function enhanceLocator(locator: Locator, debug?: boolean): EnhancedLocat
     configurable: true,
   });
 
-  return locator as EnhancedLocator;
+  return locator as StableLocatorType;
 }

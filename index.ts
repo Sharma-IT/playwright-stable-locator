@@ -4,8 +4,8 @@
 
 // Re-export the StableLocator class and related tools for direct usage
 export { StableLocator, setDefaultDebugMode, getDefaultDebugMode } from './stableLocator';
-export { enhanceLocator } from './enhancedLocator';
-export type { EnhancedLocator } from './enhancedLocator';
+export { createStableLocator } from './createStableLocator';
+export type { StableLocatorType } from './createStableLocator';
 export type { StabilityCheckResult, WaitForStableOptions } from './stableLocator';
 
 // Re-export the type definitions for Playwright extensions
@@ -50,6 +50,6 @@ export function setupStableLocatorSupport(options: { debug?: boolean } = {}): vo
     console.log('Playwright stable locator support initialized');
   }
 
-  // The actual implementation happens in enhancedLocator.ts.
-  // Tests will import { enhanceLocator } directly and apply it to locators.
+  // The actual implementation happens in createStableLocator.ts.
+  // Tests will import { createStableLocator } directly and apply it to locators.
 }

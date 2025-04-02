@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
-import { setupStableLocatorSupport, enhanceLocator, EnhancedLocator } from '../index';
+import { setupStableLocatorSupport, createStableLocator, StableLocatorType } from '../index';
 
 // Extend the Playwright Page interface for TypeScript
 declare module '@playwright/test' {
   interface Page {
-    stableLocator(selector: string): EnhancedLocator;
+    stableLocator(selector: string, debug?: boolean): StableLocatorType;
   }
 }
 
@@ -13,9 +13,9 @@ setupStableLocatorSupport();
 
 test.describe('waitFor with state: stable Tests', () => {
   test.beforeEach(async ({ page }) => {
-    // Set up a helper function to get enhanced locators
-    page.stableLocator = (selector: string) => {
-      return enhanceLocator(page.locator(selector));
+    // Set up a helper function to get stable locators
+    page.stableLocator = (selector: string, debug?: boolean) => {
+      return createStableLocator(page.locator(selector), debug);
     };
 
     // Navigate to our test page with animations
@@ -28,8 +28,8 @@ test.describe('waitFor with state: stable Tests', () => {
       await page.locator('#toggle-animations').click();
     }
 
-    // Get a regular locator and enhance it
-    const locator = enhanceLocator(page.locator('#moving-btn'));
+    // Get a regular locator and create a stable version
+    const locator = createStableLocator(page.locator('#moving-btn'));
 
     // Try with animation running - should fail with timeout
     const unstablePromise = locator.waitFor({ state: 'stable', timeout: 500 });
@@ -62,8 +62,8 @@ test.describe('waitFor with state: stable Tests', () => {
       if (button) button.style.visibility = 'hidden';
     });
 
-    // Get a regular locator and enhance it
-    const locator = enhanceLocator(page.locator('#normal-btn'));
+    // Get a regular locator and create a stable version
+    const locator = createStableLocator(page.locator('#normal-btn'));
 
     // waitFor with state: visible should work normally
     const visiblePromise = locator.waitFor({ state: 'visible', timeout: 500 });
