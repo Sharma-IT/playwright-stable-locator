@@ -200,7 +200,7 @@ npm run build
 npm test
 
 # Run specific test file
-npm run build:test -- tests/stable-locator.spec.ts
+npm test -- tests/stable-locator.spec.ts
 ```
 
 ## Contributing

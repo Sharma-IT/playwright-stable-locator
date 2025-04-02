@@ -12,8 +12,7 @@
     "scripts": {
         "build": "tsc",
         "test": "playwright test",
-        "build:test": "npm run build && npm test",
-        "debug": "npm run build && npx playwright test tests/debug-locator.spec.ts --project=chromium"
+        "debug": "npx playwright test tests/debug-locator.spec.ts"
     },
     "keywords": [
         "playwright",
