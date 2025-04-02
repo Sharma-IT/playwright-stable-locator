@@ -1,6 +1,6 @@
 {
     "name": "playwright-stable-locator",
-    "version": "2.1.0",
+    "version": "2.2.0",
     "description": "Extends Playwright with the ability to wait for elements to be stable (not animating)",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
