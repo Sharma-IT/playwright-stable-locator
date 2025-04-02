@@ -8,6 +8,6 @@
     "esModuleInterop": true,
     "lib": ["DOM", "ES2018"]
   },
-  "include": ["*.ts"],
-  "exclude": ["node_modules", "tests", "dist"]
-} 
+  "include": ["index.ts", "enhancedLocator.ts", "stableLocator.ts", "playwrightTypes.ts"],
+  "exclude": ["node_modules", "tests", "dist", "playwright.config.ts"]
+}
