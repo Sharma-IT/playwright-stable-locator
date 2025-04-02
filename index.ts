@@ -5,7 +5,12 @@
 // Re-export the StableLocator class and related tools for direct usage
 export { StableLocator, setDefaultDebugMode, getDefaultDebugMode } from './stableLocator';
 export { enhanceLocator } from './enhancedLocator';
+export type { EnhancedLocator } from './enhancedLocator';
 export type { StabilityCheckResult, WaitForStableOptions } from './stableLocator';
+
+// Re-export the type definitions for Playwright extensions
+// This ensures consumers get the correct type definitions without needing to use type assertions
+export * from './playwrightTypes';
 
 // Configuration object for global settings
 export const config = {
@@ -16,7 +21,7 @@ export const config = {
   set debugMode(value: boolean) {
     setDefaultDebugMode(value);
   },
-  
+
   /**
    * Get current debug mode setting
    */
@@ -30,7 +35,7 @@ import { setDefaultDebugMode, getDefaultDebugMode } from './stableLocator';
 
 /**
  * Sets up Playwright with the ability to wait for elements to be stable (not animating)
- * 
+ *
  * @param options Configuration options
  * @param options.debug Whether to enable debug mode for detailed logging (default: false)
  */
@@ -39,14 +44,12 @@ export function setupStableLocatorSupport(options: { debug?: boolean } = {}): vo
   if (options.debug !== undefined) {
     setDefaultDebugMode(options.debug);
   }
-  
+
   // Output a message indicating setup was applied
   if (getDefaultDebugMode()) {
-    console.log('Playwright stable locator support initialized (debug mode: ON)');
-  } else {
     console.log('Playwright stable locator support initialized');
   }
-  
+
   // The actual implementation happens in enhancedLocator.ts.
   // Tests will import { enhanceLocator } directly and apply it to locators.
 }
